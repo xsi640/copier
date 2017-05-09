@@ -1,0 +1,25 @@
+.page{
+  display:grid;
+  grid-template-columns: 80px auto 120px;
+  grid-template-rows: 40px 40px;
+  padding:20px;
+
+  .alt-source, .alt-target{
+    line-height: 30px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  .btn-source, .btn-target{
+    margin-left:10px;
+  }
+  .prog{
+    grid-column: 1/4;
+    width: 100%;
+    height: 20px;
+    display: none;
+  }
+  .btn-copy{
+    margin-top: 10px;
+  }
+}
