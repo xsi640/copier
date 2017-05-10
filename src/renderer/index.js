@@ -4,23 +4,24 @@ import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
 import Page from './containers/page'
-import {reducer} from './reducers/reducers'
+import Main from './containers/main'
+import reducers from './reducers/'
 
 const middlewares = [];
 
 if (process.env.NODE_ENV === `development`) {
-    const { logger } = require(`redux-logger`);
+    const {logger} = require(`redux-logger`);
     middlewares.push(logger);
 }
 middlewares.push(thunk)
 
-const store = createStore(reducer, applyMiddleware(...middlewares));
+const store = createStore(reducers, applyMiddleware(...middlewares));
 
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Page/>
+                <Main/>
             </Provider>
         );
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {actions} from '../actions/actions'
+import {actions} from '../actions/fileinfoaction'
 import Input from 'antd/lib/input';
 import Button from 'antd/lib/button';
 import Progress from 'antd/lib/progress';

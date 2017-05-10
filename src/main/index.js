@@ -2,6 +2,11 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const regIPCMessage = require('./regIPCMessage')
+const log = require('electron-log');
+
+log.transports.file.level = 'warn';
+log.transports.file.format = '{h}:{i}:{s}:{ms} {text}';
+log.transports.file.maxSize = 5 * 1024 * 1024;
 
 require('electron-reload')(path.join(__dirname, '../../public/'), {electron: require('electron-prebuilt')});
 

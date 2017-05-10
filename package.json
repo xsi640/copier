@@ -41,6 +41,8 @@
   "dependencies": {
     "antd": "^2.10.0",
     "electron": "^1.6.6",
+    "electron-log": "^2.2.4",
+    "nedb": "^1.8.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
