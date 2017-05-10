@@ -8,6 +8,17 @@ export const mainActions = {
             payload: props
         }
     },
+    readList(){
+        return dispatch => {
+            ipcRenderer.once(IPCMESSAGE.FILEINFO_LIST, (event, args) => {
+                dispatch({
+                    payload: args,
+                    type: 'LIST'
+                })
+            })
+            ipcRenderer.send(IPCMESSAGE.FILEINFO_LIST)
+        }
+    },
     saveFileInfo(fileInfo){
         return dispatch => {
             dispatch({
@@ -20,17 +31,6 @@ export const mainActions = {
                 })
             })
             ipcRenderer.send(IPCMESSAGE.FILEINFO_SAVE, fileInfo)
-        }
-    },
-    readFileInfos(){
-        return dispatch =>{
-            ipcRenderer.once(IPCMESSAGE.FILEINFO_LIST, (event, args)=>{
-                dispatch({
-                    payload:args,
-                    type:'LOAD'
-                })
-            })
-            ipcRenderer.send(IPCMESSAGE.FILEINFO_LIST)
         }
     }
 }

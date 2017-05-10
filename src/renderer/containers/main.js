@@ -17,7 +17,7 @@ class Main extends Component {
     }
 
     componentDidMount(){
-        this.props.readFileInfos();
+        this.props.readList();
     }
 
     onSelectChange = (selectedRowKeys) => {
@@ -25,7 +25,7 @@ class Main extends Component {
     }
 
     handleAdd() {
-        this.props.changeProps({showFileInfo: true})
+        this.props.changeProps({showFileInfo: true, source:'', target:''})
     }
 
     handleFileInfoOK(fileInfo) {
@@ -72,7 +72,12 @@ class Main extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    if(state.MainReducer.target){
+        state.FileInfoReducer.target = state.MainReducer.target;
+    }
+    if(state.MainReducer.source){
+        state.FileInfoReducer.source = state.MainReducer.source;
+    }
     return state.MainReducer;
 }
 

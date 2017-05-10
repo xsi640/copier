@@ -11,8 +11,8 @@ export default function fileInfoReducer(state, action) {
             } else {
                 return {...state, error: action.payload.error, loading: false};
             }
-        case "LOAD":
-            return {...state, ...action.payload.data};
+        case "LIST":
+            return {...state, ...action.payload};
         case "CHANGE_PROPS":
             return {...state, ...action.payload};
         default:

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Modal, Button, Input, Alert} from 'antd';
 import {fileInfoAction} from '../actions/fileinfoaction'
 import {connect} from 'react-redux'
+import './fileinfo.scss'
 
 class FileInfo extends Component {
 
