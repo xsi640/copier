@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-const sourcePath = 'D:\\electron_demo\\electron-react-redux-hot-template';
-
 const getSubFileSystems = (dir) => {
     let result = [];
 
@@ -31,4 +29,20 @@ const createDir = (dir) => {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
+}
+
+const isFile = (path) => {
+    return fs.lstatSync(path).isFile();
+}
+
+const combine = (...paths) => {
+    return path.join(...paths)
+}
+
+module.exports = {
+    getSubFileSystems,
+    copy,
+    createDir,
+    isFile,
+    combine
 }

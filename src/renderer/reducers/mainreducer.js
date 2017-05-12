@@ -1,20 +1,13 @@
-export default function fileInfoReducer(state, action) {
-    if (typeof state === 'undefined')
-        return {showFileInfo: false};
-
+export default function mainReducer(state = {}, action) {
     switch (action.type) {
-        case "SAVE_WORKING":
+        case 'LIST':
+            return {...state, ...action.payload, loading: false}
+        case 'LIST_WORK':
             return {...state, loading: true}
-        case "SAVE":
-            if (typeof action.payload.error === 'undefined') {
-                return {...state, ...action.payload.data, loading: false, showFileInfo: false};
-            } else {
-                return {...state, error: action.payload.error, loading: false};
-            }
-        case "LIST":
-            return {...state, ...action.payload};
-        case "CHANGE_PROPS":
-            return {...state, ...action.payload};
+        case 'DELETE':
+            return {...state, deletedId: action.payload.data, loading: false}
+        case 'DELETE_WORK':
+            return {...state, loading: true}
         default:
             return state;
     }

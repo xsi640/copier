@@ -3,8 +3,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux'
 import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
-import Page from './containers/page'
-import Main from './containers/main'
+import Main from './components/main'
 import reducers from './reducers/'
 
 const middlewares = [];

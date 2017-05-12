@@ -13,6 +13,7 @@ require('electron-reload')(path.join(__dirname, '../../public/'), {electron: req
 let win
 
 function createWindow() {
+
     regIPCMessage();
     win = new BrowserWindow({
         width: 800,

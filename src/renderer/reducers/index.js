@@ -1,8 +1,8 @@
-import FileInfoReducer from './fileinforeducer'
+import FileModalReducer from './filemodalreducer'
 import MainReducer from './mainreducer'
 import {combineReducers} from 'redux'
 
 export default combineReducers({
-    FileInfoReducer,
+    FileModalReducer,
     MainReducer
 })

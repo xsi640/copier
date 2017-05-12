@@ -2,14 +2,11 @@ const {ipcRenderer} = require('electron')
 import * as IPCMESSAGE from '../../constipc'
 
 export const mainActions = {
-    changeProps(props){
-        return {
-            type: 'CHANGE_PROPS',
-            payload: props
-        }
-    },
-    readList(){
+    list(){
         return dispatch => {
+            dispatch({
+                type: 'LIST_WORK'
+            })
             ipcRenderer.once(IPCMESSAGE.FILEINFO_LIST, (event, args) => {
                 dispatch({
                     payload: args,
@@ -19,18 +16,24 @@ export const mainActions = {
             ipcRenderer.send(IPCMESSAGE.FILEINFO_LIST)
         }
     },
-    saveFileInfo(fileInfo){
+    delete(ids){
         return dispatch => {
             dispatch({
-                type: 'SAVE_WORKING'
+                type: 'DELETE_WORK'
             })
-            ipcRenderer.once(IPCMESSAGE.FILEINFO_SAVE, (event, args) => {
+            ipcRenderer.once(IPCMESSAGE.FILEINFO_DELETE, (event, args) => {
                 dispatch({
                     payload: args,
-                    type: 'SAVE'
+                    type: 'DELETE'
                 })
             })
-            ipcRenderer.send(IPCMESSAGE.FILEINFO_SAVE, fileInfo)
+            ipcRenderer.send(IPCMESSAGE.FILEINFO_DELETE, ids);
         }
+    },
+    copy(){
+
+    },
+    cancelCopy(){
+
     }
 }
