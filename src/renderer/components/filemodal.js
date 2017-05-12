@@ -66,7 +66,6 @@ class FileModal extends Component {
     }
 
     show(fileInfo = null) {
-        this.setState({visible: true});
         this._fileInfo = fileInfo;
         if (this._fileInfo === null)
             this.setState({title: '添加复制文件夹'});
@@ -85,6 +84,7 @@ class FileModal extends Component {
                 filter: '',
             })
         }
+        this.setState({visible: true});
     }
 
     onClose() {

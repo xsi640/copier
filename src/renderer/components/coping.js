@@ -7,8 +7,8 @@ export default class Coping extends Component {
             <div>
                 <Modal visible={this.props.visible} closable={false} maskClosable={false}
                        footer={[<Button key="back" onClick={this.props.onClose}> 取消 </Button>]}>
-                    总进度：<Progress percent={this.props.currPer} strokeWidth={5} status="active"/>
-                    当前进度：<Progress percent={this.props.totalPer} strokeWidth={5} status="active"/>
+                    当前进度：<Progress percent={this.props.currPer} strokeWidth={5} status="active"/>
+                    总进度：<Progress percent={this.props.totalPer} strokeWidth={5} status="active"/>
                 </Modal>
             </div>)
     }

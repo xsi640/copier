@@ -21,8 +21,8 @@ const insertOrUpdate = (fileInfo, callback) => {
     }
 }
 
-const remove = (id, callback) => {
-    db.remove({_id: id}, {}, (err, num) => {
+const remove = (ids, callback) => {
+    db.remove({_id: {$in: ids}}, {}, (err, num) => {
         callback(err, num);
     })
 }

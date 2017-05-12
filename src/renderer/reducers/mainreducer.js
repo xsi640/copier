@@ -8,6 +8,8 @@ export default function mainReducer(state = {}, action) {
             return {...state, deletedId: action.payload.data, loading: false}
         case 'DELETE_WORK':
             return {...state, loading: true}
+        case 'COPY':
+            return {...state, ...action.payload}
         default:
             return state;
     }

@@ -4,6 +4,7 @@ const fs = require('fs')
 const log = require('electron-log');
 const IPCMESSAGE = require('../constipc')
 const fileInfoDB = require('./dbaccess/fileinfodb')
+const FileCopy = require('./filecopy')
 
 function regIPCMessage() {
 
@@ -43,14 +44,15 @@ function regIPCMessage() {
     })
 
     _regIPCHandler(IPCMESSAGE.FILEINFO_DELETE, (event, args, callback) => {
-        let ids = [];
-        for (let id of args) {
-            ids.push({_id: id})
-        }
-        fileInfoDB.remove(ids, (err, numbs) => {
+        fileInfoDB.remove(args, (err, numbs) => {
             callback(err, args);
         })
     })
+
+    ipcMain.on(IPCMESSAGE.COPY, (event, args) => {
+        let fileCopy = new FileCopy(event.sender);
+        fileCopy.copy();
+    });
 
     function _regIPCHandler(message, func) {
         ipcMain.on(message, (event, args) => {

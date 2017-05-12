@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fse = require('fs-extra')
 const path = require('path')
 
 const getSubFileSystems = (dir) => {
@@ -22,7 +23,7 @@ const getSubFileSystems = (dir) => {
 }
 
 const copy = (source, target) => {
-    fs.createReadStream(source).pipe(fs.createWriteStream(target));
+    fse.copySync(source, target);
 }
 
 const createDir = (dir) => {
@@ -43,6 +44,5 @@ module.exports = {
     getSubFileSystems,
     copy,
     createDir,
-    isFile,
-    combine
+    isFile
 }

@@ -15,7 +15,7 @@ class Main extends Component {
             selectedRowKeys: [],
             coping: false,
             currPer: 0,
-            maxPer: 0,
+            totalPer: 0,
         }
 
         this.showFileModal = this.showFileModal.bind(this)
@@ -133,7 +133,7 @@ class Main extends Component {
                 </div>
                 <FileModal ref="fileModal" onClose={this.closefileModal}/>
                 <Table rowKey="_id" rowSelection={rowSelection} columns={columns} dataSource={data} loading={loading}/>
-                <Coping visible={this.state.coping} currPer={this.state.currPer} maxPer={this.state.maxPer} onClose={this.copingModalClose}></Coping>
+                <Coping visible={this.state.coping} currPer={this.state.currPer} totalPer={this.state.totalPer} onClose={this.copingModalClose}></Coping>
             </div>
         )
     }

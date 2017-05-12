@@ -12,6 +12,10 @@ export default class FolderInput extends Component {
         }
     }
 
+    componentDidMount(){
+        this.setState({value: this.props.value});
+    }
+
     componentWillReceiveProps(nextProps) {
         if (typeof nextProps.value !== 'undefined') {
             this.setState({value: nextProps.value});
