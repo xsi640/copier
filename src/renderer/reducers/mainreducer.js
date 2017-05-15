@@ -10,6 +10,8 @@ export default function mainReducer(state = {}, action) {
             return {...state, loading: true}
         case 'COPY':
             return {...state, ...action.payload}
+        case 'GET_COPY':
+            return {...state, ...action.payload.data}
         default:
             return state;
     }

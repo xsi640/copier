@@ -13,7 +13,7 @@ class Main extends Component {
             loading: false,
             data: [],
             selectedRowKeys: [],
-            coping: false,
+            busy: false,
             currPer: 0,
             totalPer: 0,
         }
@@ -48,6 +48,9 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.list();
+        setInterval(() => {
+            this.props.getCopy();
+        }, 1000);
     }
 
     showFileModal(e, item) {
@@ -92,11 +95,11 @@ class Main extends Component {
         this.setState({selectedRowKeys})
     }
 
-    handleCopy(){
+    handleCopy() {
         this.props.copy();
     }
 
-    copingModalClose(){
+    copingModalClose() {
         this.props.cancelCopy();
     }
 
@@ -133,7 +136,8 @@ class Main extends Component {
                 </div>
                 <FileModal ref="fileModal" onClose={this.closefileModal}/>
                 <Table rowKey="_id" rowSelection={rowSelection} columns={columns} dataSource={data} loading={loading}/>
-                <Coping visible={this.state.coping} currPer={this.state.currPer} totalPer={this.state.totalPer} onClose={this.copingModalClose}></Coping>
+                <Coping visible={this.state.busy} currPer={this.state.currPer} totalPer={this.state.totalPer}
+                        onClose={this.copingModalClose}></Coping>
             </div>
         )
     }

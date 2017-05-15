@@ -4,7 +4,7 @@ const fs = require('fs')
 const log = require('electron-log');
 const IPCMESSAGE = require('../constipc')
 const fileInfoDB = require('./dbaccess/fileinfodb')
-const FileCopy = require('./filecopy')
+const fileCopier = require('./filecopier')
 
 function regIPCMessage() {
 
@@ -37,7 +37,7 @@ function regIPCMessage() {
         if (!fs.existsSync(args.target)) {
             throw new Error('目标文件夹路径不存在')
         }
-        if(args.source === args.target){
+        if (args.source === args.target) {
             throw new Error('源文件夹路径和目标文件夹路径不能相同')
         }
         fileInfoDB.insertOrUpdate(args, callback);
@@ -50,13 +50,22 @@ function regIPCMessage() {
     })
 
     ipcMain.on(IPCMESSAGE.COPY, (event, args) => {
-        let fileCopy = new FileCopy(event.sender);
-        fileCopy.copy();
+        fileCopier.copy();
     });
+
+    _regIPCHandler(IPCMESSAGE.GET_COPY, (event, args, callback) => {
+        callback(null, {
+            busy: fileCopier.Busy,
+            stopped: fileCopier.Stopped,
+            error: fileCopier.Error,
+            currPer: fileCopier.CurrentPer,
+            totalPer: fileCopier.TotalPer,
+        });
+    })
 
     function _regIPCHandler(message, func) {
         ipcMain.on(message, (event, args) => {
-            log.info(`receive msg:${message} args:${JSON.stringify(args)}`);
+            // log.info(`receive msg:${message} args:${JSON.stringify(args)}`);
             func(event, args, (err, result) => {
                 let data = {};
                 if (typeof err === 'undefined')
@@ -65,7 +74,7 @@ function regIPCMessage() {
                     data.data = result;
                     data.err = err;
                 }
-                log.info(`send msg:${message} data:${JSON.stringify(data)}`);
+                //log.info(`send msg:${message} data:${JSON.stringify(data)}`);
                 event.sender.send(message, data)
             });
         });

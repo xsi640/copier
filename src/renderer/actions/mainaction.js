@@ -33,7 +33,7 @@ export const mainActions = {
     copy(){
         return dispatch => {
             function listen(event, args) {
-                if(args.coping === false){
+                if (args.coping === false) {
                     ipcRenderer.removeAllListeners(IPCMESSAGE.COPY)
                 }
                 dispatch({
@@ -41,11 +41,23 @@ export const mainActions = {
                     payload: args,
                 })
             }
+
             ipcRenderer.on(IPCMESSAGE.COPY, listen)
             ipcRenderer.send(IPCMESSAGE.COPY)
         }
     },
     cancelCopy(){
 
+    },
+    getCopy(){
+        return dispatch => {
+            ipcRenderer.on(IPCMESSAGE.GET_COPY, (event, args) => {
+                dispatch({
+                    type: 'GET_COPY',
+                    payload: args
+                })
+            });
+            ipcRenderer.send(IPCMESSAGE.GET_COPY)
+        }
     }
 }
