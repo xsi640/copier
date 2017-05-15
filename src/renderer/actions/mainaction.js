@@ -31,27 +31,20 @@ export const mainActions = {
         }
     },
     copy(){
-        return dispatch => {
-            function listen(event, args) {
-                if (args.coping === false) {
-                    ipcRenderer.removeAllListeners(IPCMESSAGE.COPY)
-                }
-                dispatch({
-                    type: 'COPY',
-                    payload: args,
-                })
-            }
-
-            ipcRenderer.on(IPCMESSAGE.COPY, listen)
-            ipcRenderer.send(IPCMESSAGE.COPY)
+        ipcRenderer.send(IPCMESSAGE.COPY)
+        return {
+            type: 'COPY'
         }
     },
     cancelCopy(){
-
+        ipcRenderer.send(IPCMESSAGE.COPY_CANCEL)
+        return {
+            type: 'COPY_CANCEL'
+        }
     },
     getCopy(){
         return dispatch => {
-            ipcRenderer.on(IPCMESSAGE.GET_COPY, (event, args) => {
+            ipcRenderer.once(IPCMESSAGE.GET_COPY, (event, args) => {
                 dispatch({
                     type: 'GET_COPY',
                     payload: args

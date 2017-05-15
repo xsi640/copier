@@ -63,6 +63,10 @@ function regIPCMessage() {
         });
     })
 
+    _regIPCHandler(IPCMESSAGE.COPY_CANCEL, (event, args, callback)=>{
+        fileCopier.stop();
+    })
+
     function _regIPCHandler(message, func) {
         ipcMain.on(message, (event, args) => {
             // log.info(`receive msg:${message} args:${JSON.stringify(args)}`);

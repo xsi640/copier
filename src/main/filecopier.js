@@ -69,11 +69,18 @@ class FileCopier {
         })
     }
 
+    stop(){
+        if(this._busy){
+            this._stopping = true;
+        }
+    }
+
     copyFileInfo(index) {
         if (index >= this._fileInfos.length) {
             this._totalPer = 100;
             this._busy = false;
             if (this._stopping) {
+                this._busy = false;
                 this._stopping = false;
             }
             return;
@@ -97,8 +104,11 @@ class FileCopier {
     }
 
     realCopyFile(fileInfo, filter, fileSystems, index, cb) {
-        if (this._stopping)
+        if (this._stopping) {
+            if (cb && typeof cb === 'function')
+                cb();
             return;
+        }
 
         if (index >= fileSystems.length) {
             this._currPer = 100;

@@ -4,6 +4,7 @@ const FILEINFO_SAVE = 'FILEINFO_SAVE'
 const FILEINFO_LIST = 'FILEINFO_LIST'
 const COPY = 'COPY'
 const GET_COPY = 'GET_COPY'
+const COPY_CANCEL = 'COPY_CANCEL'
 
 module.exports = {
     BROWSE_FOLDER,
@@ -12,4 +13,5 @@ module.exports = {
     FILEINFO_LIST,
     COPY,
     GET_COPY,
+    COPY_CANCEL,
 }
